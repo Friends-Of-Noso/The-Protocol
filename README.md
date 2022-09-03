@@ -1,0 +1,11 @@
+# The Protocol documantation
+
+This is the result of the effort of documenting the Noso version 2 protocol, a.k.a., Protocol 2 or P2
+
+## The Table of Content
+
+[Start here](html/index.html)
+
+## The examples
+
+The [examples](examples/README.md) folder has code examples on every chapter.

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Chapter 1 - The Hanshake and Ping-Pong</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="the-protocol.css" />
+  <link rel="stylesheet" href="bootstrap.min.css" />
+</head>
+<body>
+<header id="title-block-header" class="container">
+<h1 class="title">Chapter 1</h1>
+<h2 class="subtitle">The Hanshake and Ping-Pong</h2>
+</header>
+<div class="container">
+<h3 id="introduction">Introduction</h3>
+<blockquote>
+<p>Note: At the end of the chapter there are code snippets and GitHub links</p>
+</blockquote>
+<p>The lines in this chapter start with the word <code>PSK</code> and then continue with data.</p>
+<p>It needs to be conformed that the word <code>PSK</code> is checked. If the first word is ignored, then anything can be the first word.</p>
+<h3 id="procedure">Procedure</h3>
+<p>According to the source code one should send the hello, immediately followed by the ping.</p>
+<p>The ping should then be sent on a continuous loop of 5 seconds interval.</p>
+<p>Need to find out more about when to expect the pong.</p>
+<h3 id="the-hello">The Hello</h3>
+<ol start="0" type="1">
+<li>The string <code>PSK</code></li>
+<li>The target IP address: String</li>
+<li>The version of the software, <code>0.3.2Ab8</code> at this moment: String</li>
+<li>The current UTC Unix timestamp: Integer</li>
+</ol>
+<p>Format string: “PSK %s %s %d”</p>
+<h3 id="the-ping">The Ping</h3>
+<ol start="0" type="1">
+<li>The string <code>PSK</code></li>
+<li>The current protocol version <code>2</code>: Integer</li>
+<li>The version of the software, <code>0.3.2Ab8</code> at this moment: String</li>
+<li>The current UTC Unix timestamp: Integer</li>
+<li>The string <code>$PING</code>: String</li>
+<li>The current amount of connections: Integer</li>
+<li>The current block number: Integer</li>
+</ol>
+<p>Format string: “PSK %d %s %d $PING %d %d”</p>
+<h3 id="the-pong">The Pong</h3>
+<ol start="0" type="1">
+<li>The string <code>PSK</code></li>
+<li>The current protocol version <code>2</code>: Integer</li>
+<li>The version of the software, <code>0.3.2Ab8</code> at this moment: String</li>
+<li>The current UTC Unix timestamp: Integer</li>
+<li>The string <code>$PONG</code>: String</li>
+<li>The current amount of connections: Integer</li>
+<li>The current block number: Integer</li>
+</ol>
+<p>Format string: “PSK %d %s %d $PONG %d %d”</p>
+<h3 id="code-and-links">Code and Links</h3>
+<blockquote>
+<p>File: mpred.pas<br />
+Function: ConnectClient<br />
+Line: 491<br />
+Commit: e0787b818f3b637971f027480d29a3538b2599b8<br />
+Link: <a href="https://github.com/Noso-Project/NosoWallet/blob/e0787b818f3b637971f027480d29a3538b2599b8/mpred.pas#L491">mpred.pas@e0787b8#491</a></p>
+</blockquote>
+<div class="sourceCode" id="cb1"><pre class="sourceCode pas"><code class="sourceCode pascal"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">function</span> ConnectClient(Address,Port:<span class="dt">String</span>):<span class="dt">integer</span>;</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="co">{...}</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>  CanalCliente[Slot].IOHandler.WriteLn(<span class="st">&#39;PSK &#39;</span>+Address+<span class="st">&#39; &#39;</span>+ProgramVersion+subversion+<span class="st">&#39; &#39;</span>+UTCTime);</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>  CanalCliente[Slot].IOHandler.WriteLn(ProtocolLine(<span class="dv">3</span>));   <span class="co">// Send PING</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="co">{...}</span></span></code></pre></div>
+<blockquote>
+<p>File: mpprotocol.pas<br />
+Function: ProtocolLine<br />
+Line: 186<br />
+Commit: e0787b818f3b637971f027480d29a3538b2599b8<br />
+Link: <a href="https://github.com/Noso-Project/NosoWallet/blob/e0787b818f3b637971f027480d29a3538b2599b8/mpprotocol.pas#L186">mpprotocol.pas@e0787b8#186</a></p>
+</blockquote>
+<div class="sourceCode" id="cb2"><pre class="sourceCode pas"><code class="sourceCode pascal"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">Function</span> ProtocolLine(tipo:<span class="dt">integer</span>):<span class="dt">String</span>;</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="co">{...}</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="kw">if</span> tipo = Ping <span class="kw">then</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>   Resultado := <span class="st">&#39;$PING &#39;</span>+GetPingString;</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="kw">if</span> tipo = Pong <span class="kw">then</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>   Resultado := <span class="st">&#39;$PONG &#39;</span>+GetPingString;</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a><span class="co">{...}</span></span></code></pre></div>
+<blockquote>
+<p>File: mpprotocol.pas<br />
+Function: GetPingString<br />
+Line: 513<br />
+Commit: e0787b818f3b637971f027480d29a3538b2599b8<br />
+Link: <a href="https://github.com/Noso-Project/NosoWallet/blob/e0787b818f3b637971f027480d29a3538b2599b8/mpprotocol.pas#L513">mpprotocol.pas@e0787b8#513</a></p>
+</blockquote>
+<div class="sourceCode" id="cb3"><pre class="sourceCode pas"><code class="sourceCode pascal"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="kw">function</span> GetPingString():<span class="dt">string</span>;</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="co">{...}</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>result :=IntToStr(GetTotalConexiones())+<span class="st">&#39; &#39;</span>+</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>         IntToStr(MyLastBlock)+<span class="st">&#39; &#39;</span>+</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a>         MyLastBlockHash+<span class="st">&#39; &#39;</span>+</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a>         MySumarioHash+<span class="st">&#39; &#39;</span>+</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a>         GetPendingCount.ToString+<span class="st">&#39; &#39;</span>+</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a>         MyResumenHash+<span class="st">&#39; &#39;</span>+</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true"></a>         IntToStr(MyConStatus)+<span class="st">&#39; &#39;</span>+</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true"></a>         IntToStr(port)+<span class="st">&#39; &#39;</span>+</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true"></a>         copy(MyMNsHash,<span class="dv">0</span>,<span class="dv">5</span>)+<span class="st">&#39; &#39;</span>+</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true"></a>         IntToStr(GetMNsListLength)+<span class="st">&#39; &#39;</span>+</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true"></a>         GetNMSData.Diff+<span class="st">&#39; &#39;</span>+</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true"></a>         GetMNsChecksCount.ToString+<span class="st">&#39; &#39;</span>+</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true"></a>         MyGVTsHash+<span class="st">&#39; &#39;</span>+</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true"></a>         Copy(HashMD5String(GetNosoCFG),<span class="dv">0</span>,<span class="dv">5</span>);</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true"></a><span class="co">{...}</span></span></code></pre></div>
+</div>
+<footer class="container">
+</footer>
+</body>
+</html>
