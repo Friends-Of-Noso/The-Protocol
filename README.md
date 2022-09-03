@@ -1,4 +1,4 @@
-# The Protocol documantation
+# The Protocol documentation
 
 This is the result of the effort of documenting the Noso version 2 protocol, a.k.a., Protocol 2 or P2
 
