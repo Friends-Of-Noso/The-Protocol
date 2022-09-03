@@ -4,7 +4,7 @@ This is the result of the effort of documenting the Noso version 2 protocol, a.k
 
 ## The Table of Content
 
-[Start here](html/index.html)
+[Start here](html)
 
 ## The examples
 
