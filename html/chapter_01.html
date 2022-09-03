@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Gustavo Carreno guscarreno@gmail.com" />
   <title>Chapter 1 - The Hanshake and Ping-Pong</title>
   <style>
     code{white-space: pre-wrap;}
@@ -78,11 +79,26 @@
   <link rel="stylesheet" href="bootstrap.min.css" />
 </head>
 <body>
-<header id="title-block-header" class="container">
-<h1 class="title">Chapter 1</h1>
-<h2 class="subtitle">The Hanshake and Ping-Pong</h2>
-</header>
-<div class="container">
+  <header class="p-3 text-bg-dark">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="index.html" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+          <img src="noso_coin.svg" alt="Noso logo" width="50" height="50">
+        </a>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="chapter_01.html" class="nav-link px-2 text-white">Chapter 1</a></li>
+          <li><a href="annex_01.html" class="nav-link px-2 text-white">Annex 1</a></li>
+        </ul>
+        
+      </div>
+    </div>
+  </header>
+  <div id="title-block-header" class="container">
+    <h1 class="title">Chapter 1</h1>
+    <h2 class="subtitle">The Hanshake and Ping-Pong</h2>
+  </div>
+  <div class="container">
 <h3 id="introduction">Introduction</h3>
 <blockquote>
 <p>Note: At the end of the chapter there are code snippets and GitHub links</p>
@@ -94,6 +110,7 @@
 <p>The ping should then be sent on a continuous loop of 5 seconds interval.</p>
 <p>Need to find out more about when to expect the pong.</p>
 <h3 id="the-hello">The Hello</h3>
+<p>This is a space separated string with the following data/fields:</p>
 <ol start="0" type="1">
 <li>The string <code>PSK</code></li>
 <li>The target IP address: String</li>
@@ -102,6 +119,7 @@
 </ol>
 <p>Format string: “PSK %s %s %d”</p>
 <h3 id="the-ping">The Ping</h3>
+<p>This is a space separated string with the following data/fields:</p>
 <ol start="0" type="1">
 <li>The string <code>PSK</code></li>
 <li>The current protocol version <code>2</code>: Integer</li>
@@ -110,9 +128,26 @@
 <li>The string <code>$PING</code>: String</li>
 <li>The current amount of connections: Integer</li>
 <li>The current block number: Integer</li>
+<li>The amount of pending orders: Integer</li>
+<li>The hash of the <code>NOSODATA/blchhead.nos</code> file: String</li>
+<li>Status of the connection: Integer
+<ul>
+<li>Value 0: Disconnected</li>
+<li>Value 1: Connecting</li>
+<li>Value 2: Connected</li>
+<li>Value 3: Updated</li>
+</ul></li>
+<li>Connection port: Integer</li>
+<li>Hash of the <code>NOSODATA/masternodes.txt</code> file: String</li>
+<li>The amount of Master Nodes: Integer</li>
+<li>NMsData difference(Need to ask what this means): String</li>
+<li>The amount of checked Master Nodes: Integer</li>
+<li>Hash of the <code>NOSODATA/gvts.psk</code> file: String</li>
+<li>First five characters of the hash of the CFGs(Need to ask what this means): String</li>
 </ol>
-<p>Format string: “PSK %d %s %d $PING %d %d”</p>
+<p>Format string: “PSK %d %s %d $PING %d %d %d %s %d %d %s %d %s %d %s %s”</p>
 <h3 id="the-pong">The Pong</h3>
+<p>This is a space separated string with the following data/fields:</p>
 <ol start="0" type="1">
 <li>The string <code>PSK</code></li>
 <li>The current protocol version <code>2</code>: Integer</li>
@@ -121,8 +156,24 @@
 <li>The string <code>$PONG</code>: String</li>
 <li>The current amount of connections: Integer</li>
 <li>The current block number: Integer</li>
+<li>The amount of pending orders: Integer</li>
+<li>The hash of the <code>NOSODATA/blchhead.nos</code> file: String</li>
+<li>Status of the connection: Integer
+<ul>
+<li>Value 0: Disconnected</li>
+<li>Value 1: Connecting</li>
+<li>Value 2: Connected</li>
+<li>Value 3: Updated</li>
+</ul></li>
+<li>Connection port: Integer</li>
+<li>Hash of the <code>NOSODATA/masternodes.txt</code> file: String</li>
+<li>The amount of Master Nodes: Integer</li>
+<li>NMsData difference(Need to ask what this means): String</li>
+<li>The amount of checked Master Nodes: Integer</li>
+<li>Hash of the <code>NOSODATA/gvts.psk</code> file: String</li>
+<li>First five characters of the hash of the CFGs(Need to ask what this means): String</li>
 </ol>
-<p>Format string: “PSK %d %s %d $PONG %d %d”</p>
+<p>Format string: “PSK %d %s %d $PING %d %d %d %s %d %d %s %d %s %d %s %s”</p>
 <h3 id="code-and-links">Code and Links</h3>
 <blockquote>
 <p>File: mpred.pas<br />
@@ -174,8 +225,12 @@ Link: <a href="https://github.com/Noso-Project/NosoWallet/blob/e0787b818f3b63797
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true"></a>         MyGVTsHash+<span class="st">&#39; &#39;</span>+</span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true"></a>         Copy(HashMD5String(GetNosoCFG),<span class="dv">0</span>,<span class="dv">5</span>);</span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true"></a><span class="co">{...}</span></span></code></pre></div>
-</div>
-<footer class="container">
-</footer>
+  </div>
+  <footer  class="p-3 text-bg-dark">
+    <div class="container text-white">
+      <p class="author">By Gustavo Carreno <a href="mailto:guscarreno@gmail.com" class="email">guscarreno@gmail.com</a></p>
+      <p class="date">2022/09/03</p>
+    </div>
+  </footer>
 </body>
 </html>
