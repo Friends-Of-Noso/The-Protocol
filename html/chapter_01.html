@@ -108,7 +108,10 @@
 <h3 id="procedure">Procedure</h3>
 <p>According to the source code one should send the hello, immediately followed by the ping.</p>
 <p>The ping should then be sent on a continuous loop of 5 seconds interval.</p>
-<p>Need to find out more about when to expect the pong.</p>
+<blockquote>
+<p><strong>Note</strong><br />
+Need to find out more about when to expect the pong.</p>
+</blockquote>
 <h3 id="the-hello">The Hello</h3>
 <p>This is a space separated string with the following data/fields:</p>
 <ol start="0" type="1">
@@ -127,25 +130,27 @@
 <li>The current UTC Unix timestamp: Integer</li>
 <li>The string <code>$PING</code>: String</li>
 <li>The current amount of connections: Integer</li>
-<li>The current block number: Integer</li>
-<li>The amount of pending orders: Integer</li>
-<li>The hash of the <code>NOSODATA/blchhead.nos</code> file: String</li>
+<li>The current block number(Default: 0): Integer</li>
+<li>The current block hash(Default: 4E8A4743AA6083F3833DDA1216FE3717): String</li>
+<li>The hash of the <code>NOSODATA/sumary.psk</code> file(Default: D41D8CD98F00B204E9800998ECF8427E): String</li>
+<li>The amount of pending orders(Default: 0): Integer</li>
+<li>The hash of the <code>NOSODATA/blchhead.nos</code> file(Default: D41D8CD98F00B204E9800998ECF8427E ??): String</li>
 <li>Status of the connection: Integer
 <ul>
-<li>Value 0: Disconnected</li>
-<li>Value 1: Connecting</li>
-<li>Value 2: Connected</li>
-<li>Value 3: Updated</li>
+<li>0: Disconnected</li>
+<li>1: Connecting</li>
+<li>2: Connected</li>
+<li>3: Updated</li>
 </ul></li>
-<li>Connection port: Integer</li>
-<li>Hash of the <code>NOSODATA/masternodes.txt</code> file: String</li>
-<li>The amount of Master Nodes: Integer</li>
-<li>NMsData difference(Need to ask what this means): String</li>
-<li>The amount of checked Master Nodes: Integer</li>
-<li>Hash of the <code>NOSODATA/gvts.psk</code> file: String</li>
-<li>First five characters of the hash of the CFGs(Need to ask what this means): String</li>
+<li>Connection port(Default: 8080): Integer</li>
+<li>Hash of the <code>NOSODATA/masternodes.txt</code> file(Default: D41D8CD98F00B204E9800998ECF8427E): String</li>
+<li>The amount of Master Nodes(Default: 0): Integer</li>
+<li>NMsData difference(Need to ask what this means)(Default: ??): String</li>
+<li>The amount of checked Master Nodes(Default: 0): Integer</li>
+<li>Hash of the <code>NOSODATA/gvts.psk</code> file(Default: D41D8CD98F00B204E9800998ECF8427E): String</li>
+<li>First five characters of the hash of the CFGs(Need to ask what this means)(Default: D41D8 ??): String</li>
 </ol>
-<p>Format string: “PSK %d %s %d $PING %d %d %d %s %d %d %s %d %s %d %s %s”</p>
+<p>Format string: “PSK %d %s %d $PING %d %d %s %s %d %s %d %d %s %d %s %d %s %s”</p>
 <h3 id="the-pong">The Pong</h3>
 <p>This is a space separated string with the following data/fields:</p>
 <ol start="0" type="1">
@@ -155,25 +160,27 @@
 <li>The current UTC Unix timestamp: Integer</li>
 <li>The string <code>$PONG</code>: String</li>
 <li>The current amount of connections: Integer</li>
-<li>The current block number: Integer</li>
-<li>The amount of pending orders: Integer</li>
-<li>The hash of the <code>NOSODATA/blchhead.nos</code> file: String</li>
+<li>The current block number(Default: 0): Integer</li>
+<li>The current block hash(Default: 4E8A4743AA6083F3833DDA1216FE3717): String</li>
+<li>The hash of the <code>NOSODATA/sumary.psk</code> file(Default: D41D8CD98F00B204E9800998ECF8427E): String</li>
+<li>The amount of pending orders(Default: 0): Integer</li>
+<li>The hash of the <code>NOSODATA/blchhead.nos</code> file(Default: D41D8CD98F00B204E9800998ECF8427E ??): String</li>
 <li>Status of the connection: Integer
 <ul>
-<li>Value 0: Disconnected</li>
-<li>Value 1: Connecting</li>
-<li>Value 2: Connected</li>
-<li>Value 3: Updated</li>
+<li>0: Disconnected</li>
+<li>1: Connecting</li>
+<li>2: Connected</li>
+<li>3: Updated</li>
 </ul></li>
-<li>Connection port: Integer</li>
-<li>Hash of the <code>NOSODATA/masternodes.txt</code> file: String</li>
-<li>The amount of Master Nodes: Integer</li>
-<li>NMsData difference(Need to ask what this means): String</li>
-<li>The amount of checked Master Nodes: Integer</li>
-<li>Hash of the <code>NOSODATA/gvts.psk</code> file: String</li>
-<li>First five characters of the hash of the CFGs(Need to ask what this means): String</li>
+<li>Connection port(Default: 8080): Integer</li>
+<li>Hash of the <code>NOSODATA/masternodes.txt</code> file(Default: D41D8CD98F00B204E9800998ECF8427E): String</li>
+<li>The amount of Master Nodes(Default: 0): Integer</li>
+<li>NMsData difference(Need to ask what this means)(Default: ??): String</li>
+<li>The amount of checked Master Nodes(Default: 0): Integer</li>
+<li>Hash of the <code>NOSODATA/gvts.psk</code> file(Default: D41D8CD98F00B204E9800998ECF8427E): String</li>
+<li>First five characters of the hash of the CFGs(Need to ask what this means)(Default: D41D8 ??): String</li>
 </ol>
-<p>Format string: “PSK %d %s %d $PONG %d %d %d %s %d %d %s %d %s %d %s %s”</p>
+<p>Format string: “PSK %d %s %d $PONG %d %d %s %s %d %s %d %d %s %d %s %d %s %s”</p>
 <h3 id="code-and-links">Code and Links</h3>
 <blockquote>
 <p>File: mpred.pas<br />
