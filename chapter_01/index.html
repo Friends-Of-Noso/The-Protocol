@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="author" content="Gustavo Carreno <guscarreno@gmail.com>">
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Chapter 1 - The Noso Protocol</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css">
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">The Noso Protocol</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Chapters <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="./" class="dropdown-item active">Chapter 1</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Annexes <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../annex_01/" class="dropdown-item">Annex 1</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href=".." class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../annex_01/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/Friends-of-Noso/The-Protocol/edit/main/docs/chapter_01.md" class="nav-link"><i class="fa fa-github"></i> Edit on GitHub</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#chapter-1-the-handshake-and-the-ping-pong" class="nav-link">Chapter 1: The Handshake and the PING-PONG</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#introduction" class="nav-link">Introduction</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#procedure" class="nav-link">Procedure</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#the-hello" class="nav-link">The Hello</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#the-ping" class="nav-link">The Ping</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#the-pong" class="nav-link">The Pong</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#code-and-links" class="nav-link">Code and Links</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="chapter-1-the-handshake-and-the-ping-pong">Chapter 1: The Handshake and the PING-PONG</h1>
+<h2 id="introduction">Introduction</h2>
+<blockquote>
+<p>Note: At the end of the chapter there are code snippets and GitHub links</p>
+</blockquote>
+<p>The lines in this chapter start with the word <code>PSK</code> and then continue with data.</p>
+<p>It needs to be conformed that the word <code>PSK</code> is checked. If the first word is ignored, then anything can be the first word.</p>
+<h2 id="procedure">Procedure</h2>
+<p>According to the source code one should send the <a href="#the-hello">hello</a>, immediately followed by the <a href="#the-ping">ping</a>.</p>
+<p>The <a href="#the-ping">ping</a> should then be sent on a continuous loop of 5 seconds interval.</p>
+<blockquote>
+<p><strong>Note</strong><br />
+Need to find out more about when to expect the pong.</p>
+</blockquote>
+<p>This is the data that comes out of a node trying to connect:</p>
+<pre><code class="language-console">$ nc -l 8080
+PSK 10.42.0.68 0.3.2Ab8 1659944140
+PSK 2 0.3.2Ab8 1659944140 $PING 4 69773 6D5FC7634CA132803A480928DBA4AED8 4DB6D1C46E0DD804923167BB807840F3 4 650D27A438E4E3E6264A079BC3EE6A12 3 -1 F35B4 163 00000000052841423044B5C791445E22 0 0B5866B63B12A3A083C72BD4BA4F330E 5EDA6
+</code></pre>
+<p>The first line is the hello.<br />
+That last line is repeated 3 more times(5 seconds interval), for a total of 15-16 seconds, until the wallet closes the connection due to perceived inactivity.</p>
+<h2 id="the-hello">The Hello</h2>
+<p>This is a space separated string with the following data/fields:</p>
+<ol>
+<li>The string <code>PSK</code></li>
+<li>The target IP address: String</li>
+<li>The version of the software, <code>0.3.2Ab8</code> at this moment: String</li>
+<li>The current UTC Unix timestamp: Integer</li>
+</ol>
+<p>Format string: "PSK %s %s %d"</p>
+<h2 id="the-ping">The Ping</h2>
+<p>This is a space separated string with the following data/fields:</p>
+<ol>
+<li>The string <code>PSK</code></li>
+<li>The current protocol version <code>2</code>: Integer</li>
+<li>The version of the software, <code>0.3.2Ab8</code> at this moment: String</li>
+<li>The current UTC Unix timestamp: Integer</li>
+<li>The string <code>$PING</code>: String</li>
+<li>The current amount of connections: Integer</li>
+<li>The current block number(Default: 0): Integer</li>
+<li>The current block hash(Default: 4E8A4743AA6083F3833DDA1216FE3717): String</li>
+<li>The hash of the <code>NOSODATA/sumary.psk</code> file(Default: D41D8CD98F00B204E9800998ECF8427E): String</li>
+<li>The amount of pending orders(Default: 0): Integer</li>
+<li>The hash of the <code>NOSODATA/blchhead.nos</code> file(Default: D41D8CD98F00B204E9800998ECF8427E ??): String</li>
+<li>Status of the connection: Integer<ul>
+<li>0: Disconnected</li>
+<li>1: Connecting</li>
+<li>2: Connected</li>
+<li>3: Updated</li>
+</ul>
+</li>
+<li>Connection port(Default: 8080): Integer</li>
+<li>Hash of the <code>NOSODATA/masternodes.txt</code> file(Default: D41D8CD98F00B204E9800998ECF8427E): String</li>
+<li>The amount of Master Nodes(Default: 0): Integer</li>
+<li>NMsData difference(Need to ask what this means)(Default: ??): String</li>
+<li>The amount of checked Master Nodes(Default: 0): Integer</li>
+<li>Hash of the <code>NOSODATA/gvts.psk</code> file(Default: D41D8CD98F00B204E9800998ECF8427E): String</li>
+<li>First five characters of the hash of the CFGs(Need to ask what this means)(Default: D41D8 ??): String</li>
+</ol>
+<p>Format string: "PSK %d %s %d $PING %d %d %s %s %d %s %d %d %s %d %s %d %s %s"</p>
+<h2 id="the-pong">The Pong</h2>
+<p>This is a space separated string with the following data/fields:</p>
+<ol>
+<li>The string <code>PSK</code></li>
+<li>The current protocol version <code>2</code>: Integer</li>
+<li>The version of the software, <code>0.3.2Ab8</code> at this moment: String</li>
+<li>The current UTC Unix timestamp: Integer</li>
+<li>The string <code>$PONG</code>: String</li>
+<li>The current amount of connections: Integer</li>
+<li>The current block number(Default: 0): Integer</li>
+<li>The current block hash(Default: 4E8A4743AA6083F3833DDA1216FE3717): String</li>
+<li>The hash of the <code>NOSODATA/sumary.psk</code> file(Default: D41D8CD98F00B204E9800998ECF8427E): String</li>
+<li>The amount of pending orders(Default: 0): Integer</li>
+<li>The hash of the <code>NOSODATA/blchhead.nos</code> file(Default: D41D8CD98F00B204E9800998ECF8427E ??): String</li>
+<li>Status of the connection: Integer<ul>
+<li>0: Disconnected</li>
+<li>1: Connecting</li>
+<li>2: Connected</li>
+<li>3: Updated</li>
+</ul>
+</li>
+<li>Connection port(Default: 8080): Integer</li>
+<li>Hash of the <code>NOSODATA/masternodes.txt</code> file(Default: D41D8CD98F00B204E9800998ECF8427E): String</li>
+<li>The amount of Master Nodes(Default: 0): Integer</li>
+<li>NMsData difference(Need to ask what this means)(Default: ??): String</li>
+<li>The amount of checked Master Nodes(Default: 0): Integer</li>
+<li>Hash of the <code>NOSODATA/gvts.psk</code> file(Default: D41D8CD98F00B204E9800998ECF8427E): String</li>
+<li>First five characters of the hash of the CFGs(Need to ask what this means)(Default: D41D8 ??): String</li>
+</ol>
+<p>Format string: "PSK %d %s %d $PONG %d %d %s %s %d %s %d %d %s %d %s %d %s %s"</p>
+<h2 id="code-and-links">Code and Links</h2>
+<blockquote>
+<p>File: mpred.pas<br />
+Function: ConnectClient<br />
+Line: 491<br />
+Commit: e0787b818f3b637971f027480d29a3538b2599b8<br />
+Link: <a href="https://github.com/Noso-Project/NosoWallet/blob/e0787b818f3b637971f027480d29a3538b2599b8/mpred.pas#L491">mpred.pas@e0787b8#491</a></p>
+</blockquote>
+<pre><code class="language-pas">function ConnectClient(Address,Port:String):integer;
+{...}
+  CanalCliente[Slot].IOHandler.WriteLn('PSK '+Address+' '+ProgramVersion+subversion+' '+UTCTime);
+  CanalCliente[Slot].IOHandler.WriteLn(ProtocolLine(3));   // Send PING
+{...}
+</code></pre>
+<blockquote>
+<p>File: mpprotocol.pas<br />
+Function: ProtocolLine<br />
+Line: 186<br />
+Commit: e0787b818f3b637971f027480d29a3538b2599b8<br />
+Link: <a href="https://github.com/Noso-Project/NosoWallet/blob/e0787b818f3b637971f027480d29a3538b2599b8/mpprotocol.pas#L186">mpprotocol.pas@e0787b8#186</a></p>
+</blockquote>
+<pre><code class="language-pas">Function ProtocolLine(tipo:integer):String;
+{...}
+if tipo = Ping then
+   Resultado := '$PING '+GetPingString;
+if tipo = Pong then
+   Resultado := '$PONG '+GetPingString;
+{...}
+</code></pre>
+<blockquote>
+<p>File: mpprotocol.pas<br />
+Function: GetPingString<br />
+Line: 513<br />
+Commit: e0787b818f3b637971f027480d29a3538b2599b8<br />
+Link: <a href="https://github.com/Noso-Project/NosoWallet/blob/e0787b818f3b637971f027480d29a3538b2599b8/mpprotocol.pas#L513">mpprotocol.pas@e0787b8#513</a></p>
+</blockquote>
+<pre><code class="language-pas">function GetPingString():string;
+{...}
+result :=IntToStr(GetTotalConexiones())+' '+
+         IntToStr(MyLastBlock)+' '+
+         MyLastBlockHash+' '+
+         MySumarioHash+' '+
+         GetPendingCount.ToString+' '+
+         MyResumenHash+' '+
+         IntToStr(MyConStatus)+' '+
+         IntToStr(port)+' '+
+         copy(MyMNsHash,0,5)+' '+
+         IntToStr(GetMNsListLength)+' '+
+         GetNMSData.Diff+' '+
+         GetMNsChecksCount.ToString+' '+
+         MyGVTsHash+' '+
+         Copy(HashMD5String(GetNosoCFG),0,5);
+{...}
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
