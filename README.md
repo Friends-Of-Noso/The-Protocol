@@ -4,7 +4,7 @@ This is the result of the effort of documenting the Noso version 2 protocol, a.k
 
 ## The HTML
 
-[Start here](html)
+[Start here](https://docs.friends-of-noso.org)
 
 ## The examples
 
