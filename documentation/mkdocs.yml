@@ -1,0 +1,13 @@
+site_name: 'The Noso Protocol'
+site_description: 'The Noso Protocol'
+theme:
+    name: mkdocs
+site_author: 'Gustavo Carreno <guscarreno@gmail.com>'
+repo_url: 'https://github.com/Friends-of-Noso/The-Protocol'
+edit_uri: 'edit/main/docs'
+nav:
+    - Home: 'index.md'
+    - Chapters:
+        - 'Chapter 1': chapter_01.md
+    - Annexes:
+        - 'Annex 1': annex_01.md
