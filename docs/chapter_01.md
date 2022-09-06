@@ -1,4 +1,4 @@
-# Chapter 1: The Handshake and the PING-PONG
+# Chapter 1: The Handshake and the Ping-Pong
 
 ## Introduction
 
