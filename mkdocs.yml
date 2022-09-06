@@ -2,6 +2,12 @@ site_name: 'The Noso Protocol'
 site_description: 'The Noso Protocol'
 theme:
     name: mkdocs
+    highlightjs: true
+    hljs_style: github
+    hljs_languages:
+        - console
+        - delphi
+        - json
 site_author: 'Gustavo Carreno <guscarreno@gmail.com>'
 repo_url: 'https://github.com/Friends-of-Noso/The-Protocol'
 edit_uri: 'edit/main/docs'
