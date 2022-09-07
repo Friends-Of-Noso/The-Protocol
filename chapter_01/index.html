@@ -103,7 +103,7 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#procedure" class="nav-link">Procedure</a>
+            <li class="nav-item" data-level="2"><a href="#the-flow" class="nav-link">The Flow</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -134,9 +134,14 @@
 <h2 id="introduction">Introduction</h2>
 <div class="callout callout-info"><strong>Note:</strong><br> At the end of the chapter there are code snippets and GitHub links.</div>
 
-<p>The lines in this chapter start with the word <code>PSK</code> and then continue with data.</p>
-<p>It needs to be conformed that the word <code>PSK</code> is checked. If the first word is ignored, then anything can be the first word.</p>
-<h2 id="procedure">Procedure</h2>
+<p>The Noso protocol is quite a simple one:</p>
+<ol>
+<li>The node connects to another node using an always on <code>TCP</code> stream connection.</li>
+<li>Sends an initial <a href="#the-hello">Hello line</a>.</li>
+<li>It then engages in sending a <a href="#the-ping">Ping line</a> every 5 seconds.</li>
+</ol>
+<p>Each message sent is also quite simple: They are composed of a string with space separated values terminated by and End-Of-Line(<code>EOL</code>) sequence.</p>
+<h2 id="the-flow">The Flow</h2>
 <p>According to the source code one should send the <a href="#the-hello">hello</a>, immediately followed by the <a href="#the-ping">ping</a>.</p>
 <p>The <a href="#the-ping">ping</a> should then be sent on a continuous loop of 5 seconds interval.</p>
 <div class="callout callout-warning"><strong>Note:</strong><br> Need to find out more about when to expect the pong.</div>
@@ -179,7 +184,7 @@ That last line is repeated 3 more times(5 seconds interval), for a total of 15-1
 </ul>
 </li>
 <li>Connection port(Default: 8080): Integer</li>
-<li>Hash of the <code>NOSODATA/masternodes.txt</code> file(Default: <code>D41D8CD98F00B204E9800998ECF8427E</code>): String</li>
+<li>First five characters of the hash of the <code>NOSODATA/masternodes.txt</code> file(Default: <code>D41D8</code>): String</li>
 <li>The amount of Master Nodes(Default: 0): Integer</li>
 <li>NMsData difference(Need to ask what this means)(Default: ??): String</li>
 <li>The amount of checked Master Nodes(Default: 0): Integer</li>
@@ -214,7 +219,7 @@ That last line is repeated 3 more times(5 seconds interval), for a total of 15-1
 </ul>
 </li>
 <li>Connection port(Default: 8080): Integer</li>
-<li>Hash of the <code>NOSODATA/masternodes.txt</code> file(Default: <code>D41D8CD98F00B204E9800998ECF8427E</code>): String</li>
+<li>First five characters of the hash of the <code>NOSODATA/masternodes.txt</code> file(Default: <code>D41D8</code>): String</li>
 <li>The amount of Master Nodes(Default: 0): Integer</li>
 <li>NMsData difference(Need to ask what this means)(Default: ??): String</li>
 <li>The amount of checked Master Nodes(Default: 0): Integer</li>
