@@ -6,6 +6,7 @@
 > Line: 171  
 > Commit: e0787b818f3b637971f027480d29a3538b2599b8  
 > Link: [masterpaskalform.pas@e0787b8#171](https://github.com/Noso-Project/NosoWallet/blob/e0787b818f3b637971f027480d29a3538b2599b8/masterpaskalform.pas#L171)
+
 ```pas
   BlockHeaderData = Packed Record
      Number         : Int64;
@@ -52,6 +53,7 @@ The time in Unix timestamp when the block was minted/built/finalised
 > Line: 188  
 > Commit: e0787b818f3b637971f027480d29a3538b2599b8  
 > Link: [masterpaskalform.pas@e0787b8#188](https://github.com/Noso-Project/NosoWallet/blob/e0787b818f3b637971f027480d29a3538b2599b8/masterpaskalform.pas#L188)
+
 ```pas
   OrderData = Packed Record
      Block : integer;

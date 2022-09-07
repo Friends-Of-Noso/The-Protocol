@@ -2,7 +2,7 @@
 
 ## Introduction
 
-> Note: At the end of the chapter there are code snippets and GitHub links
+<div class="callout callout-info"><strong>Note:</strong><br> At the end of the chapter there are code snippets and GitHub links.</div>
 
 The lines in this chapter start with the word `PSK` and then continue with data.
 
@@ -14,8 +14,7 @@ According to the source code one should send the [hello](#the-hello), immediatel
 
 The [ping](#the-ping) should then be sent on a continuous loop of 5 seconds interval.
 
-> **Note**  
-> Need to find out more about when to expect the pong.
+<div class="callout callout-warning"><strong>Note:</strong><br> Need to find out more about when to expect the pong.</div>
 
 This is the data that comes out of a node trying to connect:
 
@@ -37,7 +36,7 @@ This is a space separated string with the following data/fields:
 2. The version of the software, `0.3.2Ab8` at this moment: String
 3. The current UTC Unix timestamp: Integer
 
-Format string: "PSK %s %s %d"
+Format string: `PSK %s %s %d`
 
 ## The Ping
 
@@ -50,24 +49,29 @@ This is a space separated string with the following data/fields:
 4. The string `$PING`: String
 5. The current amount of connections: Integer
 6. The current block number(Default: 0): Integer
-7. The current block hash(Default: 4E8A4743AA6083F3833DDA1216FE3717): String
-8. The hash of the `NOSODATA/sumary.psk` file(Default: D41D8CD98F00B204E9800998ECF8427E): String
+7. The current block hash(Default: `4E8A4743AA6083F3833DDA1216FE3717`): String
+8. The hash of the `NOSODATA/sumary.psk` file(Default: `D41D8CD98F00B204E9800998ECF8427E`): String
 9. The amount of pending orders(Default: 0): Integer
-10. The hash of the `NOSODATA/blchhead.nos` file(Default: D41D8CD98F00B204E9800998ECF8427E ??): String
+10. The hash of the `NOSODATA/blchhead.nos` file(Default: `D41D8CD98F00B204E9800998ECF8427E` ??): String
 11. Status of the connection: Integer
     - 0: Disconnected
     - 1: Connecting
     - 2: Connected
     - 3: Updated
 12. Connection port(Default: 8080): Integer
-13. Hash of the `NOSODATA/masternodes.txt` file(Default: D41D8CD98F00B204E9800998ECF8427E): String
+13. Hash of the `NOSODATA/masternodes.txt` file(Default: `D41D8CD98F00B204E9800998ECF8427E`): String
 14. The amount of Master Nodes(Default: 0): Integer
 15. NMsData difference(Need to ask what this means)(Default: ??): String
 16. The amount of checked Master Nodes(Default: 0): Integer
-17. Hash of the `NOSODATA/gvts.psk` file(Default: D41D8CD98F00B204E9800998ECF8427E): String
-18. First five characters of the hash of the CFGs(Need to ask what this means)(Default: D41D8 ??): String
+17. Hash of the `NOSODATA/gvts.psk` file(Default: `D41D8CD98F00B204E9800998ECF8427E`): String
+18. First five characters of the hash of the CFGs(Need to ask what this means)(Default: `D41D8` ??): String
 
-Format string: "PSK %d %s %d $PING %d %d %s %s %d %s %d %d %s %d %s %d %s %s"
+Format string: `PSK %d %s %d $PING %d %d %s %s %d %s %d %d %s %d %s %d %s %s`
+
+<div class="callout">
+    <code>4E8A4743AA6083F3833DDA1216FE3717</code> is the value of the hash for Block 0(zero).<br>
+    <code>D41D8CD98F00B204E9800998ECF8427E</code> is the value of <code>md5</code> on an empty string.
+</div>
 
 ## The Pong
 
@@ -80,24 +84,29 @@ This is a space separated string with the following data/fields:
 4. The string `$PONG`: String
 5. The current amount of connections: Integer
 6. The current block number(Default: 0): Integer
-7. The current block hash(Default: 4E8A4743AA6083F3833DDA1216FE3717): String
-8. The hash of the `NOSODATA/sumary.psk` file(Default: D41D8CD98F00B204E9800998ECF8427E): String
+7. The current block hash(Default: `4E8A4743AA6083F3833DDA1216FE3717`): String
+8. The hash of the `NOSODATA/sumary.psk` file(Default: `D41D8CD98F00B204E9800998ECF8427E`): String
 9. The amount of pending orders(Default: 0): Integer
-10. The hash of the `NOSODATA/blchhead.nos` file(Default: D41D8CD98F00B204E9800998ECF8427E ??): String
+10. The hash of the `NOSODATA/blchhead.nos` file(Default: `D41D8CD98F00B204E9800998ECF8427E` ??): String
 11. Status of the connection: Integer
     - 0: Disconnected
     - 1: Connecting
     - 2: Connected
     - 3: Updated
 12. Connection port(Default: 8080): Integer
-13. Hash of the `NOSODATA/masternodes.txt` file(Default: D41D8CD98F00B204E9800998ECF8427E): String
+13. Hash of the `NOSODATA/masternodes.txt` file(Default: `D41D8CD98F00B204E9800998ECF8427E`): String
 14. The amount of Master Nodes(Default: 0): Integer
 15. NMsData difference(Need to ask what this means)(Default: ??): String
 16. The amount of checked Master Nodes(Default: 0): Integer
-17. Hash of the `NOSODATA/gvts.psk` file(Default: D41D8CD98F00B204E9800998ECF8427E): String
-18. First five characters of the hash of the CFGs(Need to ask what this means)(Default: D41D8 ??): String
+17. Hash of the `NOSODATA/gvts.psk` file(Default: `D41D8CD98F00B204E9800998ECF8427E`): String
+18. First five characters of the hash of the CFGs(Need to ask what this means)(Default: `D41D8` ??): String
 
-Format string: "PSK %d %s %d $PONG %d %d %s %s %d %s %d %d %s %d %s %d %s %s"
+Format string: `PSK %d %s %d $PONG %d %d %s %s %d %s %d %d %s %d %s %d %s %s`
+
+<div class="callout">
+    <code>4E8A4743AA6083F3833DDA1216FE3717</code> is the value of the hash for Block 0(zero).<br>
+    <code>D41D8CD98F00B204E9800998ECF8427E</code> is the value of <code>md5</code> on an empty string.
+</div>
 
 ## Code and Links
 

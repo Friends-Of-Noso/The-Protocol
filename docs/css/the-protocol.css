@@ -1,0 +1,44 @@
+:root {
+    --bs-gray-100: #f8f8fa;
+    --bs-gray-300: #dee2e6;
+    
+    --bs-info-rgb: 13,202,240;
+    --bs-warning-rgb: 255,193,7;
+    --bs-danger-rgb: 220,53,69;
+}
+
+.callout {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    background-color: var(--callout-bg, var(--bs-gray-100));
+    border-left: 0.25rem solid var(--callout-border, var(--bs-gray-300));
+}
+
+.callout-info {
+    --callout-bg: rgba(var(--bs-info-rgb), .09);
+    --callout-border: rgba(var(--bs-info-rgb), .5);
+}
+
+.callout-warning {
+    --callout-bg: rgba(var(--bs-warning-rgb), .19);
+    --callout-border: rgba(var(--bs-warning-rgb), .5);
+}
+
+.callout-danger {
+    --callout-bg: rgba(var(--bs-danger-rgb), .09);
+    --callout-border: rgba(var(--bs-danger-rgb), .5);
+}
+
+blockquote {
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    background-color:  rgba(var(--bs-warning-rgb), .25);
+    border-left: 0.25rem solid rgba(var(--bs-warning-rgb), .5);
+}
+
+blockquote p {
+    margin-top: 0;
+    margin-bottom: 0;
+}

@@ -1,5 +1,7 @@
 site_name: 'The Noso Protocol'
 site_description: 'The Noso Protocol'
+extra_css:
+    - css/the-protocol.css
 theme:
     name: mkdocs
     highlightjs: true
