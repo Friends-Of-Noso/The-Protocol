@@ -13,6 +13,7 @@
         <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/atelier-cave-light.min.css">
+        <link href="../css/the-protocol.css" rel="stylesheet">
 
         <script src="../js/jquery-1.10.2.min.js" defer></script>
         <script src="../js/bootstrap.min.js" defer></script>
@@ -131,18 +132,15 @@
 
 <h1 id="chapter-1-the-handshake-and-the-ping-pong">Chapter 1: The Handshake and the Ping-Pong</h1>
 <h2 id="introduction">Introduction</h2>
-<blockquote>
-<p>Note: At the end of the chapter there are code snippets and GitHub links</p>
-</blockquote>
+<div class="callout callout-info"><strong>Note:</strong><br> At the end of the chapter there are code snippets and GitHub links.</div>
+
 <p>The lines in this chapter start with the word <code>PSK</code> and then continue with data.</p>
 <p>It needs to be conformed that the word <code>PSK</code> is checked. If the first word is ignored, then anything can be the first word.</p>
 <h2 id="procedure">Procedure</h2>
 <p>According to the source code one should send the <a href="#the-hello">hello</a>, immediately followed by the <a href="#the-ping">ping</a>.</p>
 <p>The <a href="#the-ping">ping</a> should then be sent on a continuous loop of 5 seconds interval.</p>
-<blockquote>
-<p><strong>Note</strong><br />
-Need to find out more about when to expect the pong.</p>
-</blockquote>
+<div class="callout callout-warning"><strong>Note:</strong><br> Need to find out more about when to expect the pong.</div>
+
 <p>This is the data that comes out of a node trying to connect:</p>
 <pre><code class="language-console">$ nc -l 8080
 PSK 10.42.0.68 0.3.2Ab8 1659944140
@@ -158,7 +156,7 @@ That last line is repeated 3 more times(5 seconds interval), for a total of 15-1
 <li>The version of the software, <code>0.3.2Ab8</code> at this moment: String</li>
 <li>The current UTC Unix timestamp: Integer</li>
 </ol>
-<p>Format string: "PSK %s %s %d"</p>
+<p>Format string: <code>PSK %s %s %d</code></p>
 <h2 id="the-ping">The Ping</h2>
 <p>This is a space separated string with the following data/fields:</p>
 <ol>
@@ -169,10 +167,10 @@ That last line is repeated 3 more times(5 seconds interval), for a total of 15-1
 <li>The string <code>$PING</code>: String</li>
 <li>The current amount of connections: Integer</li>
 <li>The current block number(Default: 0): Integer</li>
-<li>The current block hash(Default: 4E8A4743AA6083F3833DDA1216FE3717): String</li>
-<li>The hash of the <code>NOSODATA/sumary.psk</code> file(Default: D41D8CD98F00B204E9800998ECF8427E): String</li>
+<li>The current block hash(Default: <code>4E8A4743AA6083F3833DDA1216FE3717</code>): String</li>
+<li>The hash of the <code>NOSODATA/sumary.psk</code> file(Default: <code>D41D8CD98F00B204E9800998ECF8427E</code>): String</li>
 <li>The amount of pending orders(Default: 0): Integer</li>
-<li>The hash of the <code>NOSODATA/blchhead.nos</code> file(Default: D41D8CD98F00B204E9800998ECF8427E ??): String</li>
+<li>The hash of the <code>NOSODATA/blchhead.nos</code> file(Default: <code>D41D8CD98F00B204E9800998ECF8427E</code> ??): String</li>
 <li>Status of the connection: Integer<ul>
 <li>0: Disconnected</li>
 <li>1: Connecting</li>
@@ -181,14 +179,19 @@ That last line is repeated 3 more times(5 seconds interval), for a total of 15-1
 </ul>
 </li>
 <li>Connection port(Default: 8080): Integer</li>
-<li>Hash of the <code>NOSODATA/masternodes.txt</code> file(Default: D41D8CD98F00B204E9800998ECF8427E): String</li>
+<li>Hash of the <code>NOSODATA/masternodes.txt</code> file(Default: <code>D41D8CD98F00B204E9800998ECF8427E</code>): String</li>
 <li>The amount of Master Nodes(Default: 0): Integer</li>
 <li>NMsData difference(Need to ask what this means)(Default: ??): String</li>
 <li>The amount of checked Master Nodes(Default: 0): Integer</li>
-<li>Hash of the <code>NOSODATA/gvts.psk</code> file(Default: D41D8CD98F00B204E9800998ECF8427E): String</li>
-<li>First five characters of the hash of the CFGs(Need to ask what this means)(Default: D41D8 ??): String</li>
+<li>Hash of the <code>NOSODATA/gvts.psk</code> file(Default: <code>D41D8CD98F00B204E9800998ECF8427E</code>): String</li>
+<li>First five characters of the hash of the CFGs(Need to ask what this means)(Default: <code>D41D8</code> ??): String</li>
 </ol>
-<p>Format string: "PSK %d %s %d $PING %d %d %s %s %d %s %d %d %s %d %s %d %s %s"</p>
+<p>Format string: <code>PSK %d %s %d $PING %d %d %s %s %d %s %d %d %s %d %s %d %s %s</code></p>
+<div class="callout">
+    <code>4E8A4743AA6083F3833DDA1216FE3717</code> is the value of the hash for Block 0(zero).<br>
+    <code>D41D8CD98F00B204E9800998ECF8427E</code> is the value of <code>md5</code> on an empty string.
+</div>
+
 <h2 id="the-pong">The Pong</h2>
 <p>This is a space separated string with the following data/fields:</p>
 <ol>
@@ -199,10 +202,10 @@ That last line is repeated 3 more times(5 seconds interval), for a total of 15-1
 <li>The string <code>$PONG</code>: String</li>
 <li>The current amount of connections: Integer</li>
 <li>The current block number(Default: 0): Integer</li>
-<li>The current block hash(Default: 4E8A4743AA6083F3833DDA1216FE3717): String</li>
-<li>The hash of the <code>NOSODATA/sumary.psk</code> file(Default: D41D8CD98F00B204E9800998ECF8427E): String</li>
+<li>The current block hash(Default: <code>4E8A4743AA6083F3833DDA1216FE3717</code>): String</li>
+<li>The hash of the <code>NOSODATA/sumary.psk</code> file(Default: <code>D41D8CD98F00B204E9800998ECF8427E</code>): String</li>
 <li>The amount of pending orders(Default: 0): Integer</li>
-<li>The hash of the <code>NOSODATA/blchhead.nos</code> file(Default: D41D8CD98F00B204E9800998ECF8427E ??): String</li>
+<li>The hash of the <code>NOSODATA/blchhead.nos</code> file(Default: <code>D41D8CD98F00B204E9800998ECF8427E</code> ??): String</li>
 <li>Status of the connection: Integer<ul>
 <li>0: Disconnected</li>
 <li>1: Connecting</li>
@@ -211,14 +214,19 @@ That last line is repeated 3 more times(5 seconds interval), for a total of 15-1
 </ul>
 </li>
 <li>Connection port(Default: 8080): Integer</li>
-<li>Hash of the <code>NOSODATA/masternodes.txt</code> file(Default: D41D8CD98F00B204E9800998ECF8427E): String</li>
+<li>Hash of the <code>NOSODATA/masternodes.txt</code> file(Default: <code>D41D8CD98F00B204E9800998ECF8427E</code>): String</li>
 <li>The amount of Master Nodes(Default: 0): Integer</li>
 <li>NMsData difference(Need to ask what this means)(Default: ??): String</li>
 <li>The amount of checked Master Nodes(Default: 0): Integer</li>
-<li>Hash of the <code>NOSODATA/gvts.psk</code> file(Default: D41D8CD98F00B204E9800998ECF8427E): String</li>
-<li>First five characters of the hash of the CFGs(Need to ask what this means)(Default: D41D8 ??): String</li>
+<li>Hash of the <code>NOSODATA/gvts.psk</code> file(Default: <code>D41D8CD98F00B204E9800998ECF8427E</code>): String</li>
+<li>First five characters of the hash of the CFGs(Need to ask what this means)(Default: <code>D41D8</code> ??): String</li>
 </ol>
-<p>Format string: "PSK %d %s %d $PONG %d %d %s %s %d %s %d %d %s %d %s %d %s %s"</p>
+<p>Format string: <code>PSK %d %s %d $PONG %d %d %s %s %d %s %d %d %s %d %s %d %s %s</code></p>
+<div class="callout">
+    <code>4E8A4743AA6083F3833DDA1216FE3717</code> is the value of the hash for Block 0(zero).<br>
+    <code>D41D8CD98F00B204E9800998ECF8427E</code> is the value of <code>md5</code> on an empty string.
+</div>
+
 <h2 id="code-and-links">Code and Links</h2>
 <blockquote>
 <p>File: mpred.pas<br />
