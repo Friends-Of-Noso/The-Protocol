@@ -4,11 +4,15 @@
 
 <div class="callout callout-info"><strong>Note:</strong><br> At the end of the chapter there are code snippets and GitHub links.</div>
 
-The lines in this chapter start with the word `PSK` and then continue with data.
+The Noso protocol is quite a simple one:
 
-It needs to be conformed that the word `PSK` is checked. If the first word is ignored, then anything can be the first word.
+1. The node connects to another node using an always on `TCP` stream connection.
+2. Sends an initial [Hello line](#the-hello).
+3. It then engages in sending a [Ping line](#the-ping) every 5 seconds.
 
-## Procedure
+Each message sent is also quite simple: They are composed of a string with space separated values terminated by and End-Of-Line(`EOL`) sequence.
+
+## The Flow
 
 According to the source code one should send the [hello](#the-hello), immediately followed by the [ping](#the-ping).
 
@@ -59,7 +63,7 @@ This is a space separated string with the following data/fields:
     - 2: Connected
     - 3: Updated
 12. Connection port(Default: 8080): Integer
-13. Hash of the `NOSODATA/masternodes.txt` file(Default: `D41D8CD98F00B204E9800998ECF8427E`): String
+13. First five characters of the hash of the `NOSODATA/masternodes.txt` file(Default: `D41D8`): String
 14. The amount of Master Nodes(Default: 0): Integer
 15. NMsData difference(Need to ask what this means)(Default: ??): String
 16. The amount of checked Master Nodes(Default: 0): Integer
@@ -94,7 +98,7 @@ This is a space separated string with the following data/fields:
     - 2: Connected
     - 3: Updated
 12. Connection port(Default: 8080): Integer
-13. Hash of the `NOSODATA/masternodes.txt` file(Default: `D41D8CD98F00B204E9800998ECF8427E`): String
+13. First five characters of the hash of the `NOSODATA/masternodes.txt` file(Default: `D41D8`): String
 14. The amount of Master Nodes(Default: 0): Integer
 15. NMsData difference(Need to ask what this means)(Default: ??): String
 16. The amount of checked Master Nodes(Default: 0): Integer
