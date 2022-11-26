@@ -89,7 +89,15 @@ begin
 
   try
     WriteLn('Connecting');
-    Connect(client, cServerIP, cServerPort);
+    try
+      Connect(client, cServerIP, cServerPort);
+    except
+      on E:Exception do
+      begin
+       WriteLn('Connect Error: ' + E.Message);
+       isConnected:= False;
+      end;
+    end;
     isConnected:= True;
     //WriteLn('Sending Hello');
     SendStr(client, Hello);
