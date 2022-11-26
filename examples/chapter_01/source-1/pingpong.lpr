@@ -10,7 +10,14 @@ uses
 {$IFEND}
   SysUtils
 , Classes
+, DateUtils
+, SimpleSockets
 ;
+
+const
+  cServerIP = '127.0.0.1';
+  cServerPort = 8080;
+  cClientIP = '127.0.0.1';
 
 type
 
@@ -26,18 +33,83 @@ type
 { TCommThread }
 procedure TCommThread.Execute;
 var
-  ticks: Int64;
+  client: TSocket;
+  Ping, Hello, Data: String;
+  Timer: Integer;
+  startTime: QWord;
 begin
   WriteLn('Beginning of thread');
-  ticks:= GetTickCount64;
-  while (not Terminated) do
-  begin
-    if (GetTickCount64 - ticks) > 10000 then
+  Timer := 5000;
+  client := TCPSocket(stIPv4);
+  Hello:=
+    'PSK ' +                        // Magic String
+    cClientIP + ' ' +                  // Your IP
+    '0.3.2Ad9 ' +                   // App version
+    IntToStr(DateTimeToUnix(now)) + // Unix time
+    #13#10
+  ;
+  Ping:=
+    'PSK ' +                               // Magic String
+    '2 ' +                                 // Protocol version
+    '0.3.2Ad9 ' +                          // App version
+    IntToStr(DateTimeToUnix(now)) + ' ' +  // Unix time
+    '$PING ' +                             // Magic string
+    '0 ' +                                 // Current connections
+    '0 ' +                                 // Block number
+    '4E8A4743AA6083F3833DDA1216FE3717 ' +  // Block Hash
+    'D41D8CD98F00B204E9800998ECF8427E ' +  // Hash summary.psk
+    '0 ' +                                 // Pending Orders
+    'D41D8CD98F00B204E9800998ECF8427E ' +  // Hash blchhead.nos
+    '0 ' +                                 // Connections status [0, 1,2,3]
+    '8080 ' +                              // Port
+    'D41D8 ' +                             // Hash(5) masternodes.txt
+    '0 ' +                                 // MN Count
+    '0000 ' +                              // NMsData difference aka Best Hash?
+    '0 ' +                                 // Checked Master Nodes
+    'D41D8CD98F00B204E9800998ECF8427E ' +  // Hash gvts.psk
+    'D41D8 ' +                             // Hash(5) CFGs
+    #13#10
+  ;
+
+  try
+    WriteLn('Connecting');
+    Connect(client, cServerIP, cServerPort);
+    //WriteLn('Sending Hello');
+    SendStr(client, Hello);
+    WriteLn('>>>>: ' + Trim(Hello));
+    //WriteLn('Hello sent');
+    //WriteLn('Sending Ping');
+    SendStr(Client, Ping);
+    WriteLn('>>>>: ' + Trim(Ping));
+    //WriteLn('Ping sent');
+    startTime := GetTickCount64;
+    while not Terminated do
     begin
-      WriteLn('About 10s have past');
-      ticks:= GetTickCount64;
+      if not DataAvailable(client, Timer) then
+      begin
+        if Terminated then break;
+        //WriteLn('Sending Ping');
+        SendStr(Client, Ping);
+        WriteLn('>>>>: ' + Trim(Ping));
+        //WriteLn('Ping sent');
+        startTime:=GetTickCount64;
+        Timer := 5000;
+      end
+      else
+       begin
+         if Terminated then break;
+        //WriteLn('Reading data');
+        Data := ReceiveStr(client, 1024); // 1024 max length data can be shorter
+        //WriteLn('Data read');
+        WriteLn('<<<<: ' + Trim(Data));
+        // Compute new wait period for ping to the next 5 second mark
+        Timer := 5000 - (GetTickCount64 - startTime);
+        if Timer < 0 then Timer := 0;
+      end;
     end;
-    Sleep(1);
+    WriteLn('Loop exited');
+  finally
+    CloseSocket(client);
   end;
 end;
 
