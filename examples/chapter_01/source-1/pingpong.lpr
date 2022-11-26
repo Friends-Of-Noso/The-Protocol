@@ -18,9 +18,25 @@ const
   cServerIP = '127.0.0.1';
   cServerPort = 8080;
   cClientIP = '127.0.0.1';
+  cLogFile = 'pingpong.log';
+
+var
+  isConnected: Boolean = False;
+
+procedure DoLog(const AMsg: String);
+var
+  log: TextFile;
+begin
+  AssignFile(log, cLogFile);
+  if FileExists(cLogFile) then
+    Append(log)
+  else
+    Rewrite(log);
+  WriteLn(log, Trim(AMsg));
+  CloseFile(Log);
+end;
 
 type
-
 { TCommThread }
   TCommThread = class(TThread)
   private
@@ -42,45 +58,48 @@ begin
   Timer := 5000;
   client := TCPSocket(stIPv4);
   Hello:=
-    'PSK ' +                        // Magic String
-    cClientIP + ' ' +                  // Your IP
-    '0.3.2Ad9 ' +                   // App version
-    IntToStr(DateTimeToUnix(now)) + // Unix time
+    'PSK ' +                               // Magic String
+    cClientIP + ' ' +                      // Your IP
+    '0.3.2Ad9 ' +                          // App version
+    IntToStr(DateTimeToUnix(now, False)) + // Unix time
     #13#10
   ;
   Ping:=
-    'PSK ' +                               // Magic String
-    '2 ' +                                 // Protocol version
-    '0.3.2Ad9 ' +                          // App version
-    IntToStr(DateTimeToUnix(now)) + ' ' +  // Unix time
-    '$PING ' +                             // Magic string
-    '0 ' +                                 // Current connections
-    '0 ' +                                 // Block number
-    '4E8A4743AA6083F3833DDA1216FE3717 ' +  // Block Hash
-    'D41D8CD98F00B204E9800998ECF8427E ' +  // Hash summary.psk
-    '0 ' +                                 // Pending Orders
-    'D41D8CD98F00B204E9800998ECF8427E ' +  // Hash blchhead.nos
-    '0 ' +                                 // Connections status [0, 1,2,3]
-    '8080 ' +                              // Port
-    'D41D8 ' +                             // Hash(5) masternodes.txt
-    '0 ' +                                 // MN Count
-    '0000 ' +                              // NMsData difference aka Best Hash?
-    '0 ' +                                 // Checked Master Nodes
-    'D41D8CD98F00B204E9800998ECF8427E ' +  // Hash gvts.psk
-    'D41D8 ' +                             // Hash(5) CFGs
+    'PSK ' +                                      // Magic String
+    '2 ' +                                        // Protocol version
+    '0.3.2Ad9 ' +                                 // App version
+    IntToStr(DateTimeToUnix(now, False)) + ' ' +  // Unix time
+    '$PING ' +                                    // Magic string
+    '0 ' +                                        // Current connections
+    '0 ' +                                        // Block number
+    '4E8A4743AA6083F3833DDA1216FE3717 ' +         // Block Hash
+    'D41D8CD98F00B204E9800998ECF8427E ' +         // Hash summary.psk
+    '0 ' +                                        // Pending Orders
+    'D41D8CD98F00B204E9800998ECF8427E ' +         // Hash blchhead.nos
+    '0 ' +                                        // Connections status [0, 1,2,3]
+    '8080 ' +                                     // Port
+    'D41D8 ' +                                    // Hash(5) masternodes.txt
+    '0 ' +                                        // MN Count
+    '0000 ' +                                     // NMsData difference aka Best Hash?
+    '0 ' +                                        // Checked Master Nodes
+    'D41D8CD98F00B204E9800998ECF8427E ' +         // Hash gvts.psk
+    'D41D8 ' +                                    // Hash(5) CFGs
     #13#10
   ;
 
   try
     WriteLn('Connecting');
     Connect(client, cServerIP, cServerPort);
+    isConnected:= True;
     //WriteLn('Sending Hello');
     SendStr(client, Hello);
     WriteLn('>>>>: ' + Trim(Hello));
+    DoLog('>>>>: ' + Hello);
     //WriteLn('Hello sent');
     //WriteLn('Sending Ping');
     SendStr(Client, Ping);
     WriteLn('>>>>: ' + Trim(Ping));
+    DoLog('>>>>: ' + Ping);
     //WriteLn('Ping sent');
     startTime := GetTickCount64;
     while not Terminated do
@@ -91,6 +110,7 @@ begin
         //WriteLn('Sending Ping');
         SendStr(Client, Ping);
         WriteLn('>>>>: ' + Trim(Ping));
+        DoLog('>>>>: ' + Ping);
         //WriteLn('Ping sent');
         startTime:=GetTickCount64;
         Timer := 5000;
@@ -102,6 +122,7 @@ begin
         Data := ReceiveStr(client, 1024); // 1024 max length data can be shorter
         //WriteLn('Data read');
         WriteLn('<<<<: ' + Trim(Data));
+        DoLog('<<<<: ' + Data);
         // Compute new wait period for ping to the next 5 second mark
         Timer := 5000 - (GetTickCount64 - startTime);
         if Timer < 0 then Timer := 0;
@@ -109,7 +130,10 @@ begin
     end;
     WriteLn('Loop exited');
   finally
+    WriteLn('Closing socket');
     CloseSocket(client);
+    WriteLn('Socket closed');
+    isConnected:= False;
   end;
 end;
 
@@ -124,6 +148,8 @@ var
 
 begin
   WriteLn('Ping Pong');
+  if FileExists(cLogFile) then
+    DeleteFile(cLogFile);
   thread:= TCommThread.Create(True);
   try
     WriteLn('Starting thread');
@@ -133,9 +159,12 @@ begin
     WriteLn('*********************');
     ReadLn;
   finally
-    WriteLn('Terminating Thread');
-    thread.Terminate;
-    WriteLn('Waiting for thread shutdown');
-    thread.WaitFor;
+    if isConnected then
+    begin
+      WriteLn('Terminating Thread');
+      thread.Terminate;
+      WriteLn('Waiting for thread shutdown');
+      thread.WaitFor;
+    end;
   end;
 end.
