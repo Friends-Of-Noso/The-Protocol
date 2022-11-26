@@ -1,0 +1,3 @@
+[submodule "examples/chapter_01/source-1/simplesockects"]
+	path = examples/chapter_01/source-1/simplesockets
+	url = git@github.com:Warfley/PasSimpleSockets.git
