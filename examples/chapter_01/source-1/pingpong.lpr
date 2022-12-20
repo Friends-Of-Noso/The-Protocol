@@ -60,29 +60,29 @@ begin
   Hello:=
     'PSK ' +                               // Magic String
     cClientIP + ' ' +                      // Your IP
-    '0.3.2Ad9 ' +                          // App version
-    IntToStr(DateTimeToUnix(now, False)) + // Unix time
+    '0.3.3Aa6 ' +                          // App version
+    IntToStr(DateTimeToUnix(now, False)) + // Unix time. This need sto be in UTC, which it is not in this case
     #13#10
   ;
   Ping:=
     'PSK ' +                                      // Magic String
     '2 ' +                                        // Protocol version
-    '0.3.2Ad9 ' +                                 // App version
-    IntToStr(DateTimeToUnix(now, False)) + ' ' +  // Unix time
+    '0.3.3Aa6 ' +                                 // App version
+    IntToStr(DateTimeToUnix(now, False)) + ' ' +  // Unix time. This need sto be in UTC, which it is not in this case
     '$PING ' +                                    // Magic string
     '0 ' +                                        // Current connections
     '0 ' +                                        // Block number
-    '4E8A4743AA6083F3833DDA1216FE3717 ' +         // Block Hash
-    'D41D8CD98F00B204E9800998ECF8427E ' +         // Hash summary.psk
+    '4E8A4743AA6083F3833DDA1216FE3717 ' +         // Block Hash (Genesis block hash)
+    'D41D8CD98F00B204E9800998ECF8427E ' +         // Hash summary.psk (This is the MD5 hash for empty)
     '0 ' +                                        // Pending Orders
-    'D41D8CD98F00B204E9800998ECF8427E ' +         // Hash blchhead.nos
+    'D41D8CD98F00B204E9800998ECF8427E ' +         // Hash blchhead.nos (This is the MD5 hash for empty)
     '0 ' +                                        // Connections status [0, 1,2,3]
     '8080 ' +                                     // Port
-    'D41D8 ' +                                    // Hash(5) masternodes.txt
+    'D41D8 ' +                                    // Hash(5) masternodes.txt (This is the MD5 hash for empty)
     '0 ' +                                        // MN Count
     '0000 ' +                                     // NMsData difference aka Best Hash?
     '0 ' +                                        // Checked Master Nodes
-    'D41D8CD98F00B204E9800998ECF8427E ' +         // Hash gvts.psk
+    'D41D8CD98F00B204E9800998ECF8427E ' +         // Hash gvts.psk (This is the MD5 hash for empty)
     'D41D8 ' +                                    // Hash(5) CFGs
     #13#10
   ;
