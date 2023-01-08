@@ -62,3 +62,5 @@ backup/
 
 # Castalia statistics file
 *.stat
+
+.DS_Store
