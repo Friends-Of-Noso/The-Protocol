@@ -16,9 +16,12 @@ uses
 
 const
   cServerIP = '127.0.0.1';
+  //cServerIP = '1.169.128.198';
+  //cServerIP = '1.169.179.156';
   cServerPort = 8080;
   cClientIP = '127.0.0.1';
   cLogFile = 'pingpong.log';
+  cAppVersion = '0.4.2Aa1';
 
 var
   isConnected: Boolean = False;
@@ -60,14 +63,14 @@ begin
   Hello:=
     'PSK ' +                               // Magic String
     cClientIP + ' ' +                      // Your IP
-    '0.3.3Aa6 ' +                          // App version
+    CAppVersion + ' ' +                    // App version
     IntToStr(DateTimeToUnix(now, False)) + // Unix time. This need sto be in UTC, which it is not in this case
     #13#10
   ;
   Ping:=
     'PSK ' +                                      // Magic String
     '2 ' +                                        // Protocol version
-    '0.3.3Aa6 ' +                                 // App version
+    cAppVersion + ' ' +                           // App version
     IntToStr(DateTimeToUnix(now, False)) + ' ' +  // Unix time. This need sto be in UTC, which it is not in this case
     '$PING ' +                                    // Magic string
     '0 ' +                                        // Current connections
