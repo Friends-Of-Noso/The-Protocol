@@ -15,8 +15,8 @@ uses
 ;
 
 const
-  cServerIP = '127.0.0.1';
-  //cServerIP = '1.169.128.198';
+  //cServerIP = '127.0.0.1';
+  cServerIP = '1.169.128.198';
   //cServerIP = '1.169.179.156';
   cServerPort = 8080;
   cClientIP = '127.0.0.1';
@@ -87,6 +87,7 @@ begin
     '0 ' +                                        // Checked Master Nodes
     'D41D8CD98F00B204E9800998ECF8427E ' +         // Hash gvts.psk (This is the MD5 hash for empty)
     'D41D8 ' +                                    // Hash(5) CFGs
+    'D41D8' +                                     // Hash(5) PSOs
     #13#10
   ;
 
@@ -130,7 +131,7 @@ begin
        begin
          if Terminated then break;
         //WriteLn('Reading data');
-        Data := ReceiveStr(client, 1024); // 1024 max length data can be shorter
+        Data := ReceiveStr(client, 8192); // 8192 max length data can be shorter
         //WriteLn('Data read');
         WriteLn('<<<<: ' + Trim(Data));
         DoLog('<<<<: ' + Data);
