@@ -16,8 +16,8 @@ uses
 
 const
   //cServerIP = '127.0.0.1';
-  cServerIP = '1.169.128.198';
-  //cServerIP = '1.169.179.156';
+  //cServerIP = '1.169.128.198';
+  cServerIP = '1.169.179.156';
   cServerPort = 8080;
   cClientIP = '127.0.0.1';
   cLogFile = 'pingpong.log';
@@ -56,40 +56,51 @@ var
   Ping, Hello, Data: String;
   Timer: Integer;
   startTime: QWord;
+
+  procedure BuildHello;
+  begin
+    Hello:=
+      'PSK ' +                               // Magic String
+      cClientIP + ' ' +                      // Your IP
+      CAppVersion + ' ' +                    // App version
+      IntToStr(DateTimeToUnix(now, False)) + // Unix time. This need sto be in UTC, which it is not in this case
+      #13#10
+    ;
+  end;
+
+  procedure BuildPing;
+  begin
+    Ping:=
+      'PSK ' +                                      // Magic String
+      '2 ' +                                        // Protocol version
+      cAppVersion + ' ' +                           // App version
+      IntToStr(DateTimeToUnix(now, False)) + ' ' +  // Unix time. This need sto be in UTC, which it is not in this case
+      '$PING ' +                                    // Magic string
+      '0 ' +                                        // Current connections
+      '0 ' +                                        // Block number
+      '4E8A4743AA6083F3833DDA1216FE3717 ' +         // Block Hash (Genesis block hash)
+      'D41D8CD98F00B204E9800998ECF8427E ' +         // Hash summary.psk (This is the MD5 hash for empty)
+      '0 ' +                                        // Pending Orders
+      'D41D8CD98F00B204E9800998ECF8427E ' +         // Hash blchhead.nos (This is the MD5 hash for empty)
+      '0 ' +                                        // Connections status [0, 1,2,3]
+      '8080 ' +                                     // Port
+      'D41D8 ' +                                    // Hash(5) masternodes.txt (This is the MD5 hash for empty)
+      '0 ' +                                        // MN Count
+      '0000 ' +                                     // NMsData difference aka Best Hash?
+      '0 ' +                                        // Checked Master Nodes
+      'D41D8CD98F00B204E9800998ECF8427E ' +         // Hash gvts.psk (This is the MD5 hash for empty)
+      'D41D8 ' +                                    // Hash(5) CFGs
+      'D41D8' +                                     // Hash(5) PSOs
+      #13#10
+    ;
+  end;
+
 begin
   WriteLn('Beginning of thread');
   Timer := 5000;
   client := TCPSocket(stIPv4);
-  Hello:=
-    'PSK ' +                               // Magic String
-    cClientIP + ' ' +                      // Your IP
-    CAppVersion + ' ' +                    // App version
-    IntToStr(DateTimeToUnix(now, False)) + // Unix time. This need sto be in UTC, which it is not in this case
-    #13#10
-  ;
-  Ping:=
-    'PSK ' +                                      // Magic String
-    '2 ' +                                        // Protocol version
-    cAppVersion + ' ' +                           // App version
-    IntToStr(DateTimeToUnix(now, False)) + ' ' +  // Unix time. This need sto be in UTC, which it is not in this case
-    '$PING ' +                                    // Magic string
-    '0 ' +                                        // Current connections
-    '0 ' +                                        // Block number
-    '4E8A4743AA6083F3833DDA1216FE3717 ' +         // Block Hash (Genesis block hash)
-    'D41D8CD98F00B204E9800998ECF8427E ' +         // Hash summary.psk (This is the MD5 hash for empty)
-    '0 ' +                                        // Pending Orders
-    'D41D8CD98F00B204E9800998ECF8427E ' +         // Hash blchhead.nos (This is the MD5 hash for empty)
-    '0 ' +                                        // Connections status [0, 1,2,3]
-    '8080 ' +                                     // Port
-    'D41D8 ' +                                    // Hash(5) masternodes.txt (This is the MD5 hash for empty)
-    '0 ' +                                        // MN Count
-    '0000 ' +                                     // NMsData difference aka Best Hash?
-    '0 ' +                                        // Checked Master Nodes
-    'D41D8CD98F00B204E9800998ECF8427E ' +         // Hash gvts.psk (This is the MD5 hash for empty)
-    'D41D8 ' +                                    // Hash(5) CFGs
-    'D41D8' +                                     // Hash(5) PSOs
-    #13#10
-  ;
+  BuildHello;
+  BuildPing;
 
   try
     WriteLn('Connecting');
@@ -120,6 +131,7 @@ begin
       begin
         if Terminated then break;
         //WriteLn('Sending Ping');
+        BuildPing;
         SendStr(Client, Ping);
         WriteLn('>>>>: ' + Trim(Ping));
         DoLog('>>>>: ' + Ping);
@@ -131,7 +143,7 @@ begin
        begin
          if Terminated then break;
         //WriteLn('Reading data');
-        Data := ReceiveStr(client, 8192); // 8192 max length data can be shorter
+        Data := ReceiveStr(client, 1024*1024); // 1 MiByte max length data can be shorter
         //WriteLn('Data read');
         WriteLn('<<<<: ' + Trim(Data));
         DoLog('<<<<: ' + Data);
