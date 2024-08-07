@@ -8,7 +8,7 @@ Contains the Object Pascal [example](source-1)
 
 ## Folder `source-2`
 
-Will contain the C# [example](source-2)
+Will contain the Go [example](source-2)
 
 ## Folder `source-3`
 
